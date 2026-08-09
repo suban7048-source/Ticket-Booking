@@ -1,0 +1,511 @@
+import { ServiceCategory, Provider, Booking, Message, AppNotification } from '../types';
+
+export const mockCategories: ServiceCategory[] = [
+  {
+    id: 'plumbing',
+    name: 'Plumbing',
+    iconName: 'Wrench',
+    count: 142,
+    description: 'Leak fixes, pipe replacements, drain cleaning, and emergency repairs.',
+    popularServices: ['Drain Cleaning', 'Pipe Repair', 'Water Heater Setup', 'Faucet Replacement']
+  },
+  {
+    id: 'electrical',
+    name: 'Electrical',
+    iconName: 'Zap',
+    count: 98,
+    description: 'Wiring, outlet installs, circuit breakers, and lighting fixtures.',
+    popularServices: ['Lighting Installation', 'Circuit Repair', 'EV Charger Install', 'Panel Upgrade']
+  },
+  {
+    id: 'cleaning',
+    name: 'Cleaning',
+    iconName: 'Sparkles',
+    count: 215,
+    description: 'Deep house cleaning, move-in/out service, and carpet sanitization.',
+    popularServices: ['Deep Home Cleaning', 'Move-out Cleaning', 'Window Washing', 'Carpet Cleaning']
+  },
+  {
+    id: 'appliance-repair',
+    name: 'Appliance Repair',
+    iconName: 'Refrigerator',
+    count: 84,
+    description: 'Refrigerator, washing machine, dishwasher, and stove servicing.',
+    popularServices: ['Fridge Diagnostic', 'Washer Repair', 'Dishwasher Fix', 'Oven Maintenance']
+  },
+  {
+    id: 'painting',
+    name: 'Painting',
+    iconName: 'Paintbrush',
+    count: 110,
+    description: 'Interior and exterior wall painting, touch-ups, and cabinet refinishing.',
+    popularServices: ['Interior Room Painting', 'Exterior House Paint', 'Cabinet Refinishing', 'Wall Touchup']
+  },
+  {
+    id: 'ac-hvac',
+    name: 'AC & HVAC',
+    iconName: 'Wind',
+    count: 76,
+    description: 'AC tune-ups, duct cleaning, thermostat setup, and furnace repair.',
+    popularServices: ['AC Maintenance', 'Duct Sanitization', 'Thermostat Install', 'Heating Tune-up']
+  },
+  {
+    id: 'carpentry',
+    name: 'Carpentry',
+    iconName: 'Hammer',
+    count: 65,
+    description: 'Custom furniture, door fittings, shelf building, and deck repairs.',
+    popularServices: ['Custom Shelving', 'Door Installation', 'Furniture Repair', 'Deck Maintenance']
+  },
+  {
+    id: 'computer-it',
+    name: 'Computer & IT',
+    iconName: 'Monitor',
+    count: 52,
+    description: 'Wi-Fi setup, computer repair, home network configuration, and smart home setups.',
+    popularServices: ['Mesh Wi-Fi Setup', 'PC Diagnostic', 'Smart Home Setup', 'Data Recovery']
+  },
+  {
+    id: 'home-maintenance',
+    name: 'Home Maintenance',
+    iconName: 'Home',
+    count: 180,
+    description: 'Handyman services, gutter clearing, drywall repair, and furniture assembly.',
+    popularServices: ['Furniture Assembly', 'Drywall Repair', 'Gutter Cleaning', 'TV Wall Mounting']
+  },
+  {
+    id: 'other',
+    name: 'Other Services',
+    iconName: 'Grid',
+    count: 45,
+    description: 'Locksmith, pest control, lawn care, and specialized home help.',
+    popularServices: ['Lock Rekeying', 'Pest Extermination', 'Lawn Mowing', 'Pressure Washing']
+  }
+];
+
+export const mockProviders: Provider[] = [
+  {
+    id: 'p1',
+    name: 'Marcus Vance',
+    businessName: 'Vance Plumbing & Drainage',
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1000',
+    category: 'Plumbing',
+    subCategories: ['Pipe Repair', 'Drain Cleaning', 'Water Heaters'],
+    rating: 4.9,
+    reviewCount: 128,
+    completedJobs: 312,
+    startingPrice: 65,
+    priceUnit: 'hourly',
+    distanceMiles: 1.8,
+    nextAvailable: 'Today, 2:30 PM',
+    location: 'Downtown, Sector 4',
+    serviceRadiusMiles: 15,
+    isVerified: true,
+    yearsExperience: 12,
+    responseTime: '15 mins',
+    bio: 'Licensed master plumber specializing in high-efficiency plumbing repairs, clogged drains, and tankless water heater installs.',
+    about: 'I have over 12 years of hands-on plumbing experience serving residential and commercial properties. Guaranteed clean work site and transparent upfront pricing without hidden fees.',
+    offeredServices: [
+      { id: 's101', name: 'Emergency Drain Clog Clearing', description: 'Power snaking and camera inspection for blocked drains', price: 95, priceUnit: 'fixed', durationMinutes: 60 },
+      { id: 's102', name: 'Standard Plumbing Inspection & Repair', description: 'General diagnosis for leaks, faucets, and valves', price: 65, priceUnit: 'hourly', durationMinutes: 90 },
+      { id: 's103', name: 'Water Heater Replacement / Install', description: 'Full installation of tankless or standard water heaters', price: 250, priceUnit: 'fixed', durationMinutes: 180 },
+    ],
+    availabilitySlots: [
+      { day: 'Today', slots: ['2:30 PM', '4:00 PM', '5:30 PM'] },
+      { day: 'Tomorrow', slots: ['9:00 AM', '11:00 AM', '1:30 PM', '3:30 PM'] },
+      { day: 'This Week', slots: ['10:00 AM', '2:00 PM', '4:00 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf1', title: 'Modern Bathroom Pipe Installation', imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600', description: 'Complete copper pipe re-routing' },
+      { id: 'pf2', title: 'Tankless Water Heater Setup', imageUrl: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&q=80&w=600', description: 'Eco-friendly water heating system' }
+    ],
+    reviews: [
+      {
+        id: 'r1',
+        authorName: 'Sarah Jenkins',
+        authorAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: '3 days ago',
+        comment: 'Marcus arrived within 30 minutes for an emergency kitchen pipe leak! Super professional, clean, and reasonably priced. Highly recommend!',
+        tags: ['Punctual', 'Fast Response', 'Fair Price'],
+        serviceUsed: 'Emergency Drain Clog Clearing'
+      },
+      {
+        id: 'r2',
+        authorName: 'David Miller',
+        authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 4.8 },
+        date: '2 weeks ago',
+        comment: 'Installed our tankless water heater efficiently. Took time to explain the operation settings. Great work!',
+        tags: ['Expert Work', 'Clean Cleanup'],
+        serviceUsed: 'Water Heater Replacement'
+      }
+    ],
+    phone: '+1 (555) 234-8901',
+    email: 'marcus@vanceplumbing.com'
+  },
+  {
+    id: 'p2',
+    name: 'Elena Rostova',
+    businessName: 'SparklePro Deep Clean',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1000',
+    category: 'Cleaning',
+    subCategories: ['Deep House Clean', 'Move-Out Service', 'Office Sanitation'],
+    rating: 4.95,
+    reviewCount: 210,
+    completedJobs: 540,
+    startingPrice: 80,
+    priceUnit: 'fixed',
+    distanceMiles: 2.4,
+    nextAvailable: 'Tomorrow, 9:00 AM',
+    location: 'West End Heights',
+    serviceRadiusMiles: 20,
+    isVerified: true,
+    yearsExperience: 8,
+    responseTime: '10 mins',
+    bio: 'Eco-friendly residential & commercial cleaning specialist using non-toxic products and HEPA filtration equipment.',
+    about: 'SparklePro brings premium hotel-standard cleanliness to your living space. We provide background-checked, insured staff and supply all organic eco-friendly materials.',
+    offeredServices: [
+      { id: 's201', name: 'Standard 2-Bedroom Deep Cleaning', description: 'Full surface wipe down, bathroom sanitization, vacuuming, & kitchen detail', price: 120, priceUnit: 'fixed', durationMinutes: 150 },
+      { id: 's202', name: 'Move-in / Move-out Turnaround Clean', description: 'Deep cabinet cleaning, appliance interior clean, baseboards, and windows', price: 180, priceUnit: 'fixed', durationMinutes: 240 },
+      { id: 's203', name: 'Weekly Maintenance Clean', description: 'Recurring quick refreshes for busy households', price: 80, priceUnit: 'fixed', durationMinutes: 90 }
+    ],
+    availabilitySlots: [
+      { day: 'Tomorrow', slots: ['9:00 AM', '1:00 PM', '4:00 PM'] },
+      { day: 'This Week', slots: ['10:00 AM', '2:00 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf3', title: 'Living Room Deep Restoration', imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=600', description: 'Spotless hardwood polishing' },
+      { id: 'pf4', title: 'Kitchen Detail Sanitization', imageUrl: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600', description: 'Stainless steel shine & oven clean' }
+    ],
+    reviews: [
+      {
+        id: 'r3',
+        authorName: 'Amanda Chen',
+        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: 'Yesterday',
+        comment: 'Elena and her team transformed our apartment before our landlord walk-through. We got our full deposit back!',
+        tags: ['Hotel Quality', 'Eco Friendly', 'Spotless'],
+        serviceUsed: 'Move-in / Move-out Turnaround Clean'
+      }
+    ],
+    phone: '+1 (555) 456-7890',
+    email: 'elena@sparklepro.com'
+  },
+  {
+    id: 'p3',
+    name: 'Carlos Mendez',
+    businessName: 'Mendez Electrical Solutions',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1000',
+    category: 'Electrical',
+    subCategories: ['Circuit Breakers', 'EV Chargers', 'Fixture Installs'],
+    rating: 4.85,
+    reviewCount: 94,
+    completedJobs: 185,
+    startingPrice: 75,
+    priceUnit: 'hourly',
+    distanceMiles: 3.1,
+    nextAvailable: 'Today, 4:30 PM',
+    location: 'Eastside Park',
+    serviceRadiusMiles: 25,
+    isVerified: true,
+    yearsExperience: 10,
+    responseTime: '20 mins',
+    bio: 'Certified master electrician for smart home upgrades, EV charger installs, panel modernizations, and safety audits.',
+    about: 'Safety is #1. We ensure all electrical work meets National Electrical Code (NEC) standards and passes local inspections seamlessly.',
+    offeredServices: [
+      { id: 's301', name: 'Level 2 EV Charger Installation', description: '240V dedicated circuit installation and charger mounting', price: 350, priceUnit: 'fixed', durationMinutes: 180 },
+      { id: 's302', name: 'Chandelier / Ceiling Fan Installation', description: 'Safe ceiling box reinforcement and wiring', price: 110, priceUnit: 'fixed', durationMinutes: 90 },
+      { id: 's303', name: 'Electrical Troubleshooting & Audit', description: 'Locating short circuits, dead outlets, & breaker trips', price: 75, priceUnit: 'hourly', durationMinutes: 60 }
+    ],
+    availabilitySlots: [
+      { day: 'Today', slots: ['4:30 PM'] },
+      { day: 'Tomorrow', slots: ['8:30 AM', '11:30 AM', '2:30 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf5', title: 'Tesla Wall Connector Setup', imageUrl: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=600', description: 'Clean conduit line in residential garage' }
+    ],
+    reviews: [
+      {
+        id: 'r4',
+        authorName: 'Robert Taylor',
+        authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: '1 week ago',
+        comment: 'Carlos installed my EV charger quickly and cleanly. Kept everything tidy and explained how to use the safety switches.',
+        tags: ['Master Electrician', 'Safe Work'],
+        serviceUsed: 'Level 2 EV Charger Installation'
+      }
+    ],
+    phone: '+1 (555) 789-0123',
+    email: 'carlos@mendezelectric.com'
+  },
+  {
+    id: 'p4',
+    name: 'Rachel Adams',
+    businessName: 'Adams Interior Painting & Decor',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80&w=1000',
+    category: 'Painting',
+    subCategories: ['Accent Walls', 'Full Room Paint', 'Cabinet Refinishing'],
+    rating: 4.9,
+    reviewCount: 76,
+    completedJobs: 145,
+    startingPrice: 150,
+    priceUnit: 'fixed',
+    distanceMiles: 4.5,
+    nextAvailable: 'Thursday, 9:00 AM',
+    location: 'Suburban Hills',
+    serviceRadiusMiles: 18,
+    isVerified: true,
+    yearsExperience: 7,
+    responseTime: '30 mins',
+    bio: 'Precision painter focused on flawless edges, zero-VOC premium paints, drywall repair, and kitchen cabinet revamps.',
+    about: 'Transform your home with crisp lines and vibrant color schemes. Includes full furniture taping and floor protection on every job.',
+    offeredServices: [
+      { id: 's401', name: 'Single Room Accent Wall & Trim', description: 'Includes wall prep, taping, sanding, and two coats of Sherwin-Williams paint', price: 175, priceUnit: 'fixed', durationMinutes: 180 },
+      { id: 's402', name: 'Kitchen Cabinet Refinishing Package', description: 'Degreasing, priming, spray finishing, and new hardware installation', price: 650, priceUnit: 'fixed', durationMinutes: 480 }
+    ],
+    availabilitySlots: [
+      { day: 'This Week', slots: ['Thursday 9:00 AM', 'Friday 1:00 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf6', title: 'Modern Navy Accent Wall', imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600', description: 'Flawless edge line with matte finish' }
+    ],
+    reviews: [
+      {
+        id: 'r5',
+        authorName: 'Emily Watson',
+        authorAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: '5 days ago',
+        comment: 'Rachel painted our master bedroom accent wall. The precision on the crown molding edge is incredible!',
+        tags: ['Precision', 'Clean Prep'],
+        serviceUsed: 'Single Room Accent Wall & Trim'
+      }
+    ],
+    phone: '+1 (555) 321-6549',
+    email: 'rachel@adamspainting.com'
+  },
+  {
+    id: 'p5',
+    name: 'David Thorne',
+    businessName: 'Thorne HVAC & Climate Care',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=1000',
+    category: 'AC & HVAC',
+    subCategories: ['AC Tune-up', 'Duct Sanitization', 'Heat Pump Repair'],
+    rating: 4.88,
+    reviewCount: 165,
+    completedJobs: 410,
+    startingPrice: 85,
+    priceUnit: 'fixed',
+    distanceMiles: 5.2,
+    nextAvailable: 'Tomorrow, 11:00 AM',
+    location: 'Northside Industrial Park',
+    serviceRadiusMiles: 30,
+    isVerified: true,
+    yearsExperience: 14,
+    responseTime: '12 mins',
+    bio: 'EPA Certified HVAC technician for central air conditioning, mini-split systems, and furnace maintenance.',
+    about: 'Keep your home comfortable year-round. Honest diagnostic assessments and upfront flat-rate pricing on all repairs.',
+    offeredServices: [
+      { id: 's501', name: 'Comprehensive AC Annual Tune-Up', description: 'Refrigerant check, coil cleaning, filter swap, & electrical check', price: 99, priceUnit: 'fixed', durationMinutes: 75 },
+      { id: 's502', name: 'Smart Thermostat Installation (Ecobee/Nest)', description: 'C-wire installation, wall plate mounting, & Wi-Fi sync', price: 85, priceUnit: 'fixed', durationMinutes: 60 }
+    ],
+    availabilitySlots: [
+      { day: 'Tomorrow', slots: ['11:00 AM', '3:00 PM'] }
+    ],
+    portfolio: [],
+    reviews: [],
+    phone: '+1 (555) 987-6543',
+    email: 'david@thornehvac.com'
+  },
+  {
+    id: 'p6',
+    name: 'Samir Patel',
+    businessName: 'Patel IT & Smart Home Tech',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000',
+    category: 'Computer & IT',
+    subCategories: ['Wi-Fi Mesh', 'Smart Locks & Cameras', 'PC Hardware'],
+    rating: 4.92,
+    reviewCount: 64,
+    completedJobs: 130,
+    startingPrice: 70,
+    priceUnit: 'hourly',
+    distanceMiles: 2.1,
+    nextAvailable: 'Today, 6:00 PM',
+    location: 'Tech Corridor, Bay District',
+    serviceRadiusMiles: 15,
+    isVerified: true,
+    yearsExperience: 9,
+    responseTime: '8 mins',
+    bio: 'Network engineer and smart home specialist. Mesh Wi-Fi optimization, Ring/Nest doorbells, and PC troubleshooting.',
+    about: 'Eliminate Wi-Fi dead zones in your house and integrate all your smart devices into one effortless phone app.',
+    offeredServices: [
+      { id: 's601', name: 'Whole-Home Mesh Wi-Fi Setup & Optimization', description: 'Hardware installation, SSID config, dead-zone elimination, & security setup', price: 120, priceUnit: 'fixed', durationMinutes: 90 },
+      { id: 's602', name: 'Smart Security Camera / Doorbell Install', description: 'Mounting, power wiring, and mobile device pairing', price: 90, priceUnit: 'fixed', durationMinutes: 60 }
+    ],
+    availabilitySlots: [
+      { day: 'Today', slots: ['6:00 PM'] },
+      { day: 'Tomorrow', slots: ['10:00 AM', '2:00 PM'] }
+    ],
+    portfolio: [],
+    reviews: [],
+    phone: '+1 (555) 654-3210',
+    email: 'samir@patelitech.com'
+  }
+];
+
+export const initialBookings: Booking[] = [
+  {
+    id: 'b1',
+    bookingNumber: 'BK-9482',
+    providerId: 'p1',
+    providerName: 'Marcus Vance',
+    providerAvatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300',
+    providerCategory: 'Plumbing',
+    providerPhone: '+1 (555) 234-8901',
+    customerId: 'usr_cust_1',
+    customerName: 'Alex Morgan',
+    customerPhone: '+1 (555) 999-1122',
+    serviceId: 's101',
+    serviceName: 'Emergency Drain Clog Clearing',
+    servicePrice: 95,
+    serviceFee: 10,
+    totalPrice: 105,
+    status: 'Scheduled',
+    scheduledDate: '2026-08-10',
+    scheduledTime: '2:30 PM',
+    serviceLocation: '742 Evergreen Terrace, Apt 4B',
+    problemDescription: 'Kitchen sink is completely backed up and draining extremely slowly after dinner.',
+    isEmergency: true,
+    notes: 'Gate code #4492. Please call upon arrival.',
+    createdAt: '2026-08-08T14:30:00Z'
+  },
+  {
+    id: 'b2',
+    bookingNumber: 'BK-9120',
+    providerId: 'p2',
+    providerName: 'Elena Rostova',
+    providerAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300',
+    providerCategory: 'Cleaning',
+    providerPhone: '+1 (555) 456-7890',
+    customerId: 'usr_cust_1',
+    customerName: 'Alex Morgan',
+    customerPhone: '+1 (555) 999-1122',
+    serviceId: 's201',
+    serviceName: 'Standard 2-Bedroom Deep Cleaning',
+    servicePrice: 120,
+    serviceFee: 12,
+    totalPrice: 132,
+    status: 'In Progress',
+    scheduledDate: '2026-08-09',
+    scheduledTime: '9:00 AM',
+    serviceLocation: '742 Evergreen Terrace, Apt 4B',
+    problemDescription: 'Deep clean needed prior to hosting family over the weekend.',
+    isEmergency: false,
+    createdAt: '2026-08-07T10:15:00Z'
+  },
+  {
+    id: 'b3',
+    bookingNumber: 'BK-8755',
+    providerId: 'p3',
+    providerName: 'Carlos Mendez',
+    providerAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300',
+    providerCategory: 'Electrical',
+    providerPhone: '+1 (555) 789-0123',
+    customerId: 'usr_cust_1',
+    customerName: 'Alex Morgan',
+    customerPhone: '+1 (555) 999-1122',
+    serviceId: 's302',
+    serviceName: 'Chandelier / Ceiling Fan Installation',
+    servicePrice: 110,
+    serviceFee: 11,
+    totalPrice: 121,
+    status: 'Completed',
+    scheduledDate: '2026-08-04',
+    scheduledTime: '11:30 AM',
+    serviceLocation: '742 Evergreen Terrace, Apt 4B',
+    problemDescription: 'Installed new dining room fixture',
+    isEmergency: false,
+    createdAt: '2026-08-02T09:00:00Z',
+    hasBeenReviewed: true
+  }
+];
+
+export const initialMessages: Message[] = [
+  {
+    id: 'm1',
+    bookingId: 'b1',
+    senderId: 'p1',
+    senderName: 'Marcus Vance',
+    senderRole: 'provider',
+    receiverId: 'usr_cust_1',
+    text: 'Hi Alex! I got your emergency booking for the drain clog. I will bring the heavy-duty snake and camera unit.',
+    timestamp: '14:35',
+    isRead: true
+  },
+  {
+    id: 'm2',
+    bookingId: 'b1',
+    senderId: 'usr_cust_1',
+    senderName: 'Alex Morgan',
+    senderRole: 'customer',
+    receiverId: 'p1',
+    text: 'Awesome, thanks Marcus! Let me know if you need gate code access.',
+    timestamp: '14:38',
+    isRead: true
+  },
+  {
+    id: 'm3',
+    bookingId: 'b1',
+    senderId: 'p1',
+    senderName: 'Marcus Vance',
+    senderRole: 'provider',
+    receiverId: 'usr_cust_1',
+    text: 'Got the gate code #4492 in the notes! I will update you when I am 15 minutes away tomorrow.',
+    timestamp: '14:40',
+    isRead: false
+  }
+];
+
+export const initialNotifications: AppNotification[] = [
+  {
+    id: 'n1',
+    title: 'Booking Confirmed',
+    message: 'Marcus Vance accepted your request for Emergency Drain Clog Clearing on Aug 10, 2:30 PM.',
+    timestamp: '2 hours ago',
+    isRead: false,
+    type: 'booking',
+    linkBookingId: 'b1'
+  },
+  {
+    id: 'n2',
+    title: 'Provider In Transit',
+    message: 'Elena Rostova is on the way to your location for Standard 2-Bedroom Deep Cleaning.',
+    timestamp: '20 mins ago',
+    isRead: false,
+    type: 'booking',
+    linkBookingId: 'b2'
+  },
+  {
+    id: 'n3',
+    title: 'New Message',
+    message: 'Marcus Vance: "I will update you when I am 15 minutes away tomorrow."',
+    timestamp: '1 hour ago',
+    isRead: false,
+    type: 'message',
+    linkBookingId: 'b1'
+  }
+];

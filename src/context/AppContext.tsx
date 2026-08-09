@@ -1,0 +1,285 @@
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { 
+  Role, PageRoute, Provider, Booking, Message, AppNotification, 
+  FilterState, BookingStatus, ProviderReview 
+} from '../types';
+import { mockProviders, initialBookings, initialMessages, initialNotifications } from '../data/mockData';
+
+interface AppContextType {
+  role: Role;
+  setRole: (role: Role) => void;
+  page: PageRoute;
+  setPage: (page: PageRoute) => void;
+  
+  // Search & Filter State
+  filters: FilterState;
+  setFilters: React.Dispatch<React.SetStateAction<FilterState>>;
+  resetFilters: () => void;
+  
+  // Providers & Bookmarks
+  providers: Provider[];
+  favorites: string[];
+  toggleFavorite: (providerId: string) => void;
+  
+  // Modals & Active Selections
+  activeProviderProfile: Provider | null;
+  setActiveProviderProfile: (provider: Provider | null) => void;
+  
+  bookingProvider: Provider | null;
+  setBookingProvider: (provider: Provider | null) => void;
+  
+  activeBookingForChat: Booking | null;
+  setActiveBookingForChat: (booking: Booking | null) => void;
+  
+  reviewBooking: Booking | null;
+  setReviewBooking: (booking: Booking | null) => void;
+  
+  isAuthModalOpen: boolean;
+  setIsAuthModalOpen: (open: boolean) => void;
+  authMode: 'login' | 'signup';
+  setAuthMode: (mode: 'login' | 'signup') => void;
+  
+  // Bookings State & Actions
+  bookings: Booking[];
+  createBooking: (newBookingData: Omit<Booking, 'id' | 'bookingNumber' | 'createdAt' | 'status'>) => Booking;
+  updateBookingStatus: (bookingId: string, newStatus: BookingStatus) => void;
+  
+  // Messages State & Actions
+  messages: Message[];
+  sendMessage: (bookingId: string, text: string, senderRole: Role) => void;
+  
+  // Reviews State & Actions
+  addReview: (providerId: string, reviewData: Omit<ProviderReview, 'id' | 'date'>, bookingId?: string) => void;
+  
+  // Notifications State & Actions
+  notifications: AppNotification[];
+  unreadNotificationCount: number;
+  markNotificationRead: (id: string) => void;
+  markAllNotificationsRead: () => void;
+  
+  // Global Navigation Helper
+  openDiscoveryWithCategory: (categoryName: string) => void;
+}
+
+const defaultFilters: FilterState = {
+  searchQuery: '',
+  location: 'All Locations',
+  category: 'All Categories',
+  minPrice: 0,
+  maxPrice: 500,
+  availability: 'all',
+  minRating: 0,
+  maxDistance: 50,
+  verifiedOnly: false,
+  sortBy: 'relevance'
+};
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [role, setRole] = useState<Role>('customer');
+  const [page, setPage] = useState<PageRoute>('landing');
+  const [filters, setFilters] = useState<FilterState>(defaultFilters);
+  const [providers, setProviders] = useState<Provider[]>(mockProviders);
+  const [favorites, setFavorites] = useState<string[]>(['p1', 'p2']);
+  
+  // Modals state
+  const [activeProviderProfile, setActiveProviderProfile] = useState<Provider | null>(null);
+  const [bookingProvider, setBookingProvider] = useState<Provider | null>(null);
+  const [activeBookingForChat, setActiveBookingForChat] = useState<Booking | null>(null);
+  const [reviewBooking, setReviewBooking] = useState<Booking | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  
+  // Bookings & Messages & Notifications
+  const [bookings, setBookings] = useState<Booking[]>(() => {
+    const saved = localStorage.getItem('localfix_bookings');
+    return saved ? JSON.parse(saved) : initialBookings;
+  });
+  
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = localStorage.getItem('localfix_messages');
+    return saved ? JSON.parse(saved) : initialMessages;
+  });
+  
+  const [notifications, setNotifications] = useState<AppNotification[]>(() => {
+    const saved = localStorage.getItem('localfix_notifications');
+    return saved ? JSON.parse(saved) : initialNotifications;
+  });
+
+  // Sync to localStorage
+  useEffect(() => {
+    localStorage.setItem('localfix_bookings', JSON.stringify(bookings));
+  }, [bookings]);
+
+  useEffect(() => {
+    localStorage.setItem('localfix_messages', JSON.stringify(messages));
+  }, [messages]);
+
+  useEffect(() => {
+    localStorage.setItem('localfix_notifications', JSON.stringify(notifications));
+  }, [notifications]);
+
+  const resetFilters = () => setFilters(defaultFilters);
+
+  const toggleFavorite = (providerId: string) => {
+    setFavorites(prev => 
+      prev.includes(providerId) ? prev.filter(id => id !== providerId) : [...prev, providerId]
+    );
+  };
+
+  const createBooking = (newBookingData: Omit<Booking, 'id' | 'bookingNumber' | 'createdAt' | 'status'>): Booking => {
+    const id = 'b_' + Math.random().toString(36).substring(2, 9);
+    const bookingNumber = 'BK-' + Math.floor(1000 + Math.random() * 9000);
+    const createdAt = new Date().toISOString();
+    
+    const newBooking: Booking = {
+      ...newBookingData,
+      id,
+      bookingNumber,
+      createdAt,
+      status: 'Requested'
+    };
+    
+    setBookings(prev => [newBooking, ...prev]);
+    
+    // Auto-create notification
+    const newNotif: AppNotification = {
+      id: 'n_' + Math.random().toString(36).substring(2, 9),
+      title: 'Booking Request Sent',
+      message: `Your booking request #${bookingNumber} for ${newBooking.serviceName} has been sent to ${newBooking.providerName}.`,
+      timestamp: 'Just now',
+      isRead: false,
+      type: 'booking',
+      linkBookingId: id
+    };
+    setNotifications(prev => [newNotif, ...prev]);
+    
+    return newBooking;
+  };
+
+  const updateBookingStatus = (bookingId: string, newStatus: BookingStatus) => {
+    setBookings(prev => prev.map(b => {
+      if (b.id === bookingId) {
+        return { ...b, status: newStatus };
+      }
+      return b;
+    }));
+
+    const targetBooking = bookings.find(b => b.id === bookingId);
+    if (targetBooking) {
+      const newNotif: AppNotification = {
+        id: 'n_' + Math.random().toString(36).substring(2, 9),
+        title: `Booking ${newStatus}`,
+        message: `Booking #${targetBooking.bookingNumber} with ${targetBooking.providerName} is now ${newStatus.toLowerCase()}.`,
+        timestamp: 'Just now',
+        isRead: false,
+        type: 'booking',
+        linkBookingId: bookingId
+      };
+      setNotifications(prev => [newNotif, ...prev]);
+    }
+  };
+
+  const sendMessage = (bookingId: string, text: string, senderRole: Role) => {
+    const targetBooking = bookings.find(b => b.id === bookingId);
+    const pId = targetBooking ? targetBooking.providerId : 'p1';
+    const pName = targetBooking ? targetBooking.providerName : 'Marcus Vance';
+    const cId = targetBooking ? targetBooking.customerId : 'usr_cust_1';
+    const cName = targetBooking ? targetBooking.customerName : 'Alex Morgan';
+
+    const newMsg: Message = {
+      id: 'm_' + Math.random().toString(36).substring(2, 9),
+      bookingId,
+      senderId: senderRole === 'customer' ? cId : pId,
+      senderName: senderRole === 'customer' ? cName : pName,
+      senderRole,
+      receiverId: senderRole === 'customer' ? pId : cId,
+      text,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      isRead: false
+    };
+
+    setMessages(prev => [...prev, newMsg]);
+  };
+
+  const addReview = (providerId: string, reviewData: Omit<ProviderReview, 'id' | 'date'>, bookingId?: string) => {
+    const newReview: ProviderReview = {
+      ...reviewData,
+      id: 'r_' + Math.random().toString(36).substring(2, 9),
+      date: 'Just now'
+    };
+
+    setProviders(prev => prev.map(p => {
+      if (p.id === providerId) {
+        const updatedReviews = [newReview, ...p.reviews];
+        const newCount = p.reviewCount + 1;
+        const totalRating = p.reviews.reduce((acc, r) => acc + r.rating, 0) + newReview.rating;
+        const newRating = parseFloat((totalRating / updatedReviews.length).toFixed(2));
+        
+        return {
+          ...p,
+          reviews: updatedReviews,
+          reviewCount: newCount,
+          rating: newRating
+        };
+      }
+      return p;
+    }));
+
+    if (bookingId) {
+      setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, hasBeenReviewed: true } : b));
+    }
+  };
+
+  const unreadNotificationCount = notifications.filter(n => !n.isRead).length;
+
+  const markNotificationRead = (id: string) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, isRead: true } : n));
+  };
+
+  const markAllNotificationsRead = () => {
+    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+  };
+
+  const openDiscoveryWithCategory = (categoryName: string) => {
+    setFilters(prev => ({
+      ...prev,
+      category: categoryName
+    }));
+    setPage('discovery');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        role, setRole,
+        page, setPage,
+        filters, setFilters, resetFilters,
+        providers, favorites, toggleFavorite,
+        activeProviderProfile, setActiveProviderProfile,
+        bookingProvider, setBookingProvider,
+        activeBookingForChat, setActiveBookingForChat,
+        reviewBooking, setReviewBooking,
+        isAuthModalOpen, setIsAuthModalOpen,
+        authMode, setAuthMode,
+        bookings, createBooking, updateBookingStatus,
+        messages, sendMessage,
+        addReview,
+        notifications, unreadNotificationCount, markNotificationRead, markAllNotificationsRead,
+        openDiscoveryWithCategory
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useApp = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useApp must be used within an AppProvider');
+  }
+  return context;
+};

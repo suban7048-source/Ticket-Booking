@@ -16,8 +16,8 @@ import { AuthModal } from './components/auth/AuthModal';
 import { ToastContainer } from './components/common/ToastContainer';
 
 const MainLayout: React.FC = () => {
-  const { 
-    page, 
+  const {
+    page,
     activeProviderProfile, setActiveProviderProfile,
     bookingProvider, setBookingProvider
   } = useApp();

@@ -364,6 +364,272 @@ export const mockProviders: Provider[] = [
     reviews: [],
     phone: '+1 (555) 654-3210',
     email: 'samir@patelitech.com'
+  },
+  {
+    id: 'p7',
+    name: 'Vikram Sharma',
+    businessName: 'Apex Appliance Masters',
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1000',
+    category: 'Appliance Repair',
+    subCategories: ['Refrigerator Fix', 'Washer & Dryer', 'Oven Diagnostics'],
+    rating: 4.94,
+    reviewCount: 112,
+    completedJobs: 290,
+    startingPrice: 75,
+    priceUnit: 'fixed',
+    distanceMiles: 1.5,
+    nextAvailable: 'Today, 3:00 PM',
+    location: 'Downtown, Sector 4',
+    serviceRadiusMiles: 18,
+    isVerified: true,
+    yearsExperience: 11,
+    responseTime: '9 mins',
+    bio: 'Factory-certified appliance technician servicing Samsung, LG, Whirlpool, Bosch, and GE home appliances.',
+    about: 'Fast, reliable appliance repair with genuine OEM replacement parts and a 90-day warranty on all labor and components.',
+    offeredServices: [
+      { id: 's701', name: 'Refrigerator Cooling & Compressor Diagnostic', description: 'Temperature sensor check, coil cleaning, & coolant leak diagnostic', price: 85, priceUnit: 'fixed', durationMinutes: 60 },
+      { id: 's702', name: 'Washing Machine Pump & Belt Repair', description: 'Drain pump replacement, drive belt alignment, & spin cycle repair', price: 110, priceUnit: 'fixed', durationMinutes: 90 },
+      { id: 's703', name: 'Oven Igniter & Thermostat Replacement', description: 'Gas igniter calibration, heating element swap, & temperature check', price: 95, priceUnit: 'fixed', durationMinutes: 75 }
+    ],
+    availabilitySlots: [
+      { day: 'Today', slots: ['3:00 PM', '5:30 PM'] },
+      { day: 'Tomorrow', slots: ['10:00 AM', '1:00 PM', '4:00 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf7', title: 'French Door Refrigerator Repair', imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600', description: 'OEM compressor swap' }
+    ],
+    reviews: [
+      {
+        id: 'r7',
+        authorName: 'Kevin Durant',
+        authorAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: '4 days ago',
+        comment: 'Vikram fixed our fridge on the same day! Had the exact LG sensor part in his truck.',
+        tags: ['Fast Fix', 'OEM Parts', 'Fair Price'],
+        serviceUsed: 'Refrigerator Cooling Diagnostic'
+      }
+    ],
+    phone: '+1 (555) 432-8765',
+    email: 'vikram@apexappliance.com'
+  },
+  {
+    id: 'p8',
+    name: 'Lucas Vance',
+    businessName: 'Vance Custom Woodworking & Shelving',
+    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1000',
+    category: 'Carpentry',
+    subCategories: ['Custom Built-ins', 'Door Alignment', 'Deck Restoration'],
+    rating: 4.89,
+    reviewCount: 88,
+    completedJobs: 175,
+    startingPrice: 115,
+    priceUnit: 'fixed',
+    distanceMiles: 3.8,
+    nextAvailable: 'Tomorrow, 10:00 AM',
+    location: 'Suburban Hills',
+    serviceRadiusMiles: 22,
+    isVerified: true,
+    yearsExperience: 13,
+    responseTime: '25 mins',
+    bio: 'Master craftsman specializing in hardwood cabinetry, floating shelving, crown molding, and patio deck repair.',
+    about: 'Custom carpentry built to stand the test of time. Precision measurements and immaculate wood finishing.',
+    offeredServices: [
+      { id: 's801', name: 'Custom Floating Shelves Installation', description: 'Concealed steel bracket mounting, custom hardwood stain, & wall leveling', price: 190, priceUnit: 'fixed', durationMinutes: 150 },
+      { id: 's802', name: 'Interior Door Hanging & Alignment Fix', description: 'Hinge adjustment, latch alignment, and door trimming', price: 115, priceUnit: 'fixed', durationMinutes: 90 },
+      { id: 's803', name: 'Outdoor Deck Board & Railing Repair', description: 'Replacing damaged cedar/composite boards and structural reinforcement', price: 220, priceUnit: 'fixed', durationMinutes: 240 }
+    ],
+    availabilitySlots: [
+      { day: 'Tomorrow', slots: ['10:00 AM', '2:00 PM'] },
+      { day: 'This Week', slots: ['Wednesday 9:00 AM', 'Friday 1:00 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf8', title: 'Oak Library Built-In Bookcase', imageUrl: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=600', description: 'Custom stained oak with LED strip lighting' }
+    ],
+    reviews: [
+      {
+        id: 'r8',
+        authorName: 'Jessica Alba',
+        authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 4.9 },
+        date: '1 week ago',
+        comment: 'Lucas built custom floating oak shelves in our living room. Absolutely stunning craftsmanship!',
+        tags: ['Master Craftsmanship', 'Precision', 'Clean Work'],
+        serviceUsed: 'Custom Floating Shelves Installation'
+      }
+    ],
+    phone: '+1 (555) 765-4321',
+    email: 'lucas@vancewoodworking.com'
+  },
+  {
+    id: 'p9',
+    name: 'Nora Al-Mansoor',
+    businessName: 'HandyPro Home Repairs & Assembly',
+    avatar: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1000',
+    category: 'Home Maintenance',
+    subCategories: ['TV Mounting', 'Furniture Assembly', 'Drywall Repair'],
+    rating: 4.97,
+    reviewCount: 156,
+    completedJobs: 380,
+    startingPrice: 75,
+    priceUnit: 'fixed',
+    distanceMiles: 1.2,
+    nextAvailable: 'Today, 5:00 PM',
+    location: 'Downtown, Sector 4',
+    serviceRadiusMiles: 15,
+    isVerified: true,
+    yearsExperience: 7,
+    responseTime: '5 mins',
+    bio: 'Top-rated home assembly & repair pro. TV wall mounting, drywall patching, furniture building, and light fixture swaps.',
+    about: 'I take the hassle out of home maintenance. Equipped with heavy-duty wall studs finders, cord concealers, and pro power tools.',
+    offeredServices: [
+      { id: 's901', name: 'TV Wall Mounting (Up to 75" with Concealed Wires)', description: 'Stud mounting, bracket installation, and wire routing behind drywall', price: 90, priceUnit: 'fixed', durationMinutes: 60 },
+      { id: 's902', name: 'IKEA / Flat-Pack Furniture Assembly', description: 'Full assembly for beds, desks, dressers, & dining sets', price: 75, priceUnit: 'fixed', durationMinutes: 90 },
+      { id: 's903', name: 'Drywall Hole Patching & Texture Match', description: 'Patching holes up to 12", sanding, texture matching, & primer coat', price: 130, priceUnit: 'fixed', durationMinutes: 120 }
+    ],
+    availabilitySlots: [
+      { day: 'Today', slots: ['5:00 PM', '6:30 PM'] },
+      { day: 'Tomorrow', slots: ['9:30 AM', '12:00 PM', '3:30 PM'] }
+    ],
+    portfolio: [
+      { id: 'pf9', title: 'OLED TV Wall Mount & Soundbar', imageUrl: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&q=80&w=600', description: 'Zero visible cables in living room setup' }
+    ],
+    reviews: [
+      {
+        id: 'r9',
+        authorName: 'Chris Evans',
+        authorAvatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: '2 days ago',
+        comment: 'Nora mounted our 65" TV in under 45 minutes with zero mess. Wires are completely hidden inside the wall!',
+        tags: ['Fast & Clean', 'Super Friendly', 'Expert Mount'],
+        serviceUsed: 'TV Wall Mounting'
+      }
+    ],
+    phone: '+1 (555) 890-1234',
+    email: 'nora@handypro.com'
+  },
+  {
+    id: 'p10',
+    name: 'Jason Miller',
+    businessName: 'HydroClear Plumbing & Sewer',
+    avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=1000',
+    category: 'Plumbing',
+    subCategories: ['Hydro-jetting', 'Garbage Disposal', 'Sewer Inspection'],
+    rating: 4.87,
+    reviewCount: 94,
+    completedJobs: 210,
+    startingPrice: 125,
+    priceUnit: 'fixed',
+    distanceMiles: 4.1,
+    nextAvailable: 'Tomorrow, 8:00 AM',
+    location: 'Eastside Park',
+    serviceRadiusMiles: 25,
+    isVerified: true,
+    yearsExperience: 15,
+    responseTime: '18 mins',
+    bio: 'Heavy-duty drain and sewer specialist. Commercial hydro-jetting, garbage disposal replacements, and main line cleanouts.',
+    about: 'When standard snakes fail, we use 4,000 PSI hydro-jetting technology to scour sewer pipes clean as new.',
+    offeredServices: [
+      { id: 's1001', name: 'Commercial 4,000 PSI Hydro-Jet Sewer Cleanout', description: 'High-pressure water jetting for root intrusion and heavy grease blockages', price: 280, priceUnit: 'fixed', durationMinutes: 120 },
+      { id: 's1002', name: 'Garbage Disposal Unit Replacement & Install', description: 'Old unit removal, new InSinkErator installation, & leak testing', price: 125, priceUnit: 'fixed', durationMinutes: 60 }
+    ],
+    availabilitySlots: [
+      { day: 'Tomorrow', slots: ['8:00 AM', '11:00 AM', '2:00 PM'] }
+    ],
+    portfolio: [],
+    reviews: [],
+    phone: '+1 (555) 901-2345',
+    email: 'jason@hydroclearplumbing.com'
+  },
+  {
+    id: 'p11',
+    name: 'Sophie Laurent',
+    businessName: 'Guardian Locksmith & Security Tech',
+    avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1000',
+    category: 'Other Services',
+    subCategories: ['Lockout Service', 'Smart Lock Setup', 'Key Rekeying'],
+    rating: 4.96,
+    reviewCount: 140,
+    completedJobs: 320,
+    startingPrice: 75,
+    priceUnit: 'fixed',
+    distanceMiles: 1.9,
+    nextAvailable: 'Today, 2:00 PM',
+    location: 'West End Heights',
+    serviceRadiusMiles: 20,
+    isVerified: true,
+    yearsExperience: 8,
+    responseTime: '7 mins',
+    bio: 'Licensed emergency locksmith & smart home entry technician. Schlage, Yale, August, & Kwikset certified.',
+    about: '24/7 emergency response for home, car, and office lockouts. Upfront flat rates with zero hidden arrival surcharges.',
+    offeredServices: [
+      { id: 's1101', name: 'Emergency Residential Lockout Unlock', description: 'Non-destructive door opening service with zero lock damage guarantee', price: 75, priceUnit: 'fixed', durationMinutes: 30 },
+      { id: 's1102', name: 'Smart Keyless Deadbolt Installation', description: 'Drilling alignment, Bluetooth/Wi-Fi hub connection, & mobile app access setup', price: 110, priceUnit: 'fixed', durationMinutes: 60 },
+      { id: 's1103', name: 'Whole-House Lock Cylinder Rekeying', description: 'Rekeying up to 4 door locks to one master key', price: 140, priceUnit: 'fixed', durationMinutes: 90 }
+    ],
+    availabilitySlots: [
+      { day: 'Today', slots: ['2:00 PM', '4:30 PM', '7:00 PM'] },
+      { day: 'Tomorrow', slots: ['9:00 AM', '1:00 PM'] }
+    ],
+    portfolio: [],
+    reviews: [
+      {
+        id: 'r11',
+        authorName: 'Marcus Wright',
+        authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150',
+        rating: 5,
+        subRatings: { quality: 5, professionalism: 5, punctuality: 5 },
+        date: 'Yesterday',
+        comment: 'Sophie arrived in 15 minutes when I locked myself out of my apartment! Super fast and professional.',
+        tags: ['Lifesaver', 'Super Fast', 'Fair Price'],
+        serviceUsed: 'Emergency Lockout Unlock'
+      }
+    ],
+    phone: '+1 (555) 012-3456',
+    email: 'sophie@guardianlocksmith.com'
+  },
+  {
+    id: 'p12',
+    name: 'Ethan Gallagher',
+    businessName: 'PureBreeze Carpet & Window Care',
+    avatar: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&q=80&w=300',
+    coverImage: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=1000',
+    category: 'Cleaning',
+    subCategories: ['Carpet Steam Clean', 'Window Detail', 'Upholstery'],
+    rating: 4.91,
+    reviewCount: 105,
+    completedJobs: 240,
+    startingPrice: 140,
+    priceUnit: 'fixed',
+    distanceMiles: 3.5,
+    nextAvailable: 'Tomorrow, 9:30 AM',
+    location: 'Suburban Hills',
+    serviceRadiusMiles: 25,
+    isVerified: true,
+    yearsExperience: 10,
+    responseTime: '14 mins',
+    bio: 'Truck-mounted steam extraction specialist for carpets, rugs, sofas, and exterior streak-free window cleaning.',
+    about: 'Deep heat extraction removes 99% of dust mites, pet dander, and stubborn stains without sticky chemical residues.',
+    offeredServices: [
+      { id: 's1201', name: 'Deep Steam Carpet Cleaning (3 Rooms)', description: 'Pre-spray treatment, high-temperature steam extraction, & deodorizing finish', price: 140, priceUnit: 'fixed', durationMinutes: 120 },
+      { id: 's1202', name: 'Streak-Free Window Wash (Whole House Exterior)', description: 'Pure water-fed pole cleaning for ground & 2nd story windows including screens', price: 165, priceUnit: 'fixed', durationMinutes: 150 }
+    ],
+    availabilitySlots: [
+      { day: 'Tomorrow', slots: ['9:30 AM', '1:30 PM'] }
+    ],
+    portfolio: [],
+    reviews: [],
+    phone: '+1 (555) 123-4567',
+    email: 'ethan@purebreezecare.com'
   }
 ];
 
